@@ -1,4 +1,8 @@
-module.exports = {SearchHash, SearchExpireDate};
+module.exports = {sendData};
+
+function sendData(string) {
+    return {"hash": SearchHash(string), "expireDate": SearchExpireDate(string)}
+}
 
 function SearchWord(string, word) {
     const letter_h = string.indexOf(word);
@@ -22,5 +26,6 @@ function SearchExpireDate(string) {
 
     let begin_date = string.indexOf("=", letter_e) + 1;
     let end_date = string.indexOf(";", letter_e);
-    return string.slice(begin_date, end_date)
+    let date = new Date(string.slice(begin_date, end_date));
+    return date;
 }

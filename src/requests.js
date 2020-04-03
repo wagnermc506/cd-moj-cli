@@ -1,16 +1,18 @@
 const restler = require('restler');
 
 function getLoginInfo() {
-    restler.post('https://moj.naquadah.com.br/cgi-bin/login.sh/' + contestName, {
-        multipart: true,
-        data: {
-            "login": username,
-            "senha": senha,
-        }
-    })
-    .on("complete", (data) => {
-
-    })
+    return new Promise( resolve => {
+        restler.post('https://moj.naquadah.com.br/cgi-bin/login.sh/' + contestName, {
+            multipart: true,
+            data: {
+                "login": username,
+                "senha": senha,
+            }
+        })
+        .on("complete", (data) => {
+            resolve(data);
+        })
+    }) 
 }
 
 function getContestPage() {
@@ -24,3 +26,5 @@ function getContestPage() {
 
     })
 }
+
+module.exports = {getLoginInfo}

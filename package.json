@@ -6,7 +6,11 @@
   "author": "Wagner Martins",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "script1": "node index.js"
+  },
   "dependencies": {
+    "prompt": "^1.0.0",
     "restler": "^3.4.0"
   }
 }
