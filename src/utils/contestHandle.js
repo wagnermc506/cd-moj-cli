@@ -1,26 +1,15 @@
-const fs = require('fs');
 const request = require('./requests');
-const loginResponse = require('./loginResponse');
+const loginResponse = require('./searchString');
 
-function SearchContest(name) {
-    const list = loadFile();
-    list.contests.map( (contest) => {
-        if(contest.contestName == name) {
-            return contest;
-        }
-    });
-    return registerContest();
-}
-
-function registerContest() {
+function registerContest(login) {
     newContest = {
-        "contestName": null,
-        "name": null,
-        "senha": null,
+        "contestName": login.contestName,
+        "name": login.username,
+        "password": login.password,
         "hash": null,
         "expireDate": null
     };
-    createHash(newContest);
+    getHash(newContest);
     return newContest;
 }
 
@@ -34,10 +23,10 @@ function changeExpireDate(date, obj) {
 
 function verifyHash(obj) {
     if (verifyDate(obj.expireDate)) return;
-    return createHash(obj);
+    return getHash(obj);
 }
 
-function createHash(obj) {
+function getHash(obj) {
     let promise = request.getLoginInfo();
     promise.then(
         (result) => {
@@ -59,11 +48,4 @@ function verifyDate(expireDate) {
     return false;
 }
 
-function loadFile() {
-    return JSON.parse(fs.readFileSync("./src/contestLogin.json"));
-}
-
-function saveFile(obj) {
-    fs.writeFileSync("./src/contestLogin.json", Buffer.from(JSON.stringify(obj)));
-    return;
-}
+module.exports = {registerContest};

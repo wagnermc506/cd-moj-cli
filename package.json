@@ -1,11 +1,14 @@
 {
   "name": "cd-moj-cli",
-  "version": "0.1",
+  "version": "1.0.0",
   "description": "Linha de comando para enviar exercícios de contests no cd-moj",
   "main": "index.js",
   "author": "Wagner Martins",
   "license": "MIT",
   "private": true,
+  "bin": {
+    "moj": "./bin/moj.js"
+  },
   "scripts": {
     "script1": "node index.js"
   },
