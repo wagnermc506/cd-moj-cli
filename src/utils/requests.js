@@ -1,12 +1,12 @@
 const restler = require('restler');
 
-function getLoginInfo() {
+function getLoginInfo(obj) {
     return new Promise( resolve => {
-        restler.post(`https://moj.naquadah.com.br/cgi-bin/login.sh/${contestName}`, {
+        restler.post(`https://moj.naquadah.com.br/cgi-bin/login.sh/${obj.contestName}`, {
             multipart: true,
             data: {
-                "login": username,
-                "senha": senha,
+                "login": obj.name,
+                "senha": obj.password,
             }
         })
         .on("complete", (data) => {
@@ -36,10 +36,10 @@ function submit() {
             },
             data: {
                 problem: problemValue,
-                filename: restler.file(path, filename, null, null, text/x-csrc)
+                filename: restler.file(path, filename, null, null, null)
             }
         })
     })
 }
 
-module.exports = {getLoginInfo}
+module.exports = {getLoginInfo, submit}
