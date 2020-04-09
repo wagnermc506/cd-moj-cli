@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const getInput = require('../src/utils/inputHandle').getInput;
-const register = require('../src/utils/contestHandle').registerContest;
-const {saveContestFile, loadAnswerFile} = require('../src/utils/fileHandle');
-const submit = require('../src/utils/requests').submit;
+const getInput = require('../lib/inputHandle').getInput;
+const register = require('../lib/utils/contestHandle').registerContest;
+const {saveContestFile, loadAnswerFile} = require('../lib/fileHandle');
+const submit = require('../lib/requests').submit;
 
 const fs = require('fs');
 //const path = require('path');
@@ -29,12 +29,6 @@ else if(args[0] == "submit") {
     //const filename = loadAnswerFile(process.cwd() + '/' + args[1]);
     //filename = path.parse(filename);
     const filename = process.cwd() + '/' + args[1];
-    
-    const obj = {
-        contestName: "silistaopublicocompleto20192apc",
-        username: "wagnermc506",
-        hash: "73d08870c689ea80812eb67d057176f7"
-    }
 
     let teste = fs.readFileSync(filename);
 
@@ -42,6 +36,6 @@ else if(args[0] == "submit") {
     // console.log(teste.toString());
 
     submit(obj, teste, filename);
-
+    console.log("first");
     //submit(obj, filename).then().catch((e) => {console.log(e)})
 }
